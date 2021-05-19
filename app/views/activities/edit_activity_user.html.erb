@@ -1,0 +1,30 @@
+  <div class="container form_padding">
+    <br>
+    <div class="form-group">
+      <%= form_tag 'update_activity_user' do %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-danger alert-dismissible d-inline-block" role="alert">
+            <%= msg %>
+          </div> 
+        <% end %>
+        <% flash.delete(:alert) %>
+        <h1>Editar fechas para <%= @user.name %></h1>
+        <p>
+          <%= label_tag :initial_date %><br>
+          <%= date_field_tag :user_initial_date, @activity_user[0][3].to_date, class: "textBox" %>
+        </p>
+        <p>
+          <%= label_tag :final_date %><br>
+          <%= date_field_tag :user_final_date, @activity_user[0][4].to_date, class: "textBox" %>
+        </p>
+        <p>
+          <%= label_tag :result_date %><br>
+          <%= date_field_tag :user_result_date, @activity_user[0][5].to_date, class: "textBox" %>
+        </p>
+        <%= hidden_field_tag :user, @user.id %>
+        <p>
+          <%= submit_tag 'Editar', class: 'btn btn-primary' %>
+        </p>
+      <% end %>
+    </div>
+  </div>

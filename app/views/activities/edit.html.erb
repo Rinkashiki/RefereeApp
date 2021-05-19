@@ -1,0 +1,33 @@
+<div class="container form_padding">
+    <br>
+    <div class="form-group">
+      <%= form_for @activity do |a| %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-danger alert-dismissible d-inline-block" role="alert">
+            <%= msg %>
+          </div> 
+        <% end %>
+        <% flash.delete(:alert) %>
+        <h1>Editar Actividad</h1>
+        <p>
+          <%= a.label :initial_date %><br>
+          <%= a.date_field :initial_date, class: "textBox" %>
+        </p>
+        <p>
+          <%= a.label :final_date %><br>
+          <%= a.date_field :final_date, class: "textBox" %>
+        </p>
+        <p>
+          <%= a.label :result_date %><br>
+          <%= a.date_field :result_date, class: "textBox" %>
+        </p>
+        <p>
+          <%= a.label :grade %><br>
+          <%= a.number_field :grade, class: "textBox" %>
+        </p>
+        <p>
+          <%= a.submit 'Editar', class: 'btn btn-primary' %>
+        </p>
+      <% end %>
+    </div>
+  </div>

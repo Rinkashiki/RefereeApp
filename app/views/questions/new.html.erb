@@ -1,0 +1,48 @@
+   <div class="container form_padding">
+    <br>
+    <div class="form-group">
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-danger alert-dismissible d-inline-block" role="alert">
+            <%= msg %>
+          </div> 
+        <% end %>
+        <% flash.delete(:alert) %>
+        <h1>Añadir Pregunta</h1>
+      <div class="m-4">
+        <% if !@activity.nil? %>
+          <%= link_to 'Trivia', new_question_path(activity: @activity, type: 'Trivia'), class: 'btn btn-primary m-1' %>
+          <% if !@clips.blank? %>
+            <%= link_to 'Video Trivia', new_question_path(activity: @activity, type: 'Video Trivia'), class: 'btn btn-primary m-1' %>
+            <%= link_to 'Video Test', new_question_path(activity: @activity, type: 'Video Test'), class: 'btn btn-primary m-1' %>
+          <% end %>
+          <%= link_to 'Pregunta Abierta', new_question_path(activity: @activity, type: 'Pregunta Abierta'), class: 'btn btn-primary m-1' %>
+          <% if !@questions.blank? %>
+            <%= link_to 'Pregunta Existente', new_question_path(activity: @activity, type: 'Pregunta Existente'), class: 'btn btn-primary m-1' %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Trivia', new_question_path(clip: @clip, type: 'Trivia'), class: 'btn btn-primary m-1' %>
+          <%= link_to 'Pregunta Abierta', new_question_path(clip: @clip, type: 'Pregunta Abierta'), class: 'btn btn-primary m-1' %>
+          <!--<% if !@questions.blank? %>
+            <%= link_to 'Pregunta Existente', new_question_path(clip: @clip, type: 'Pregunta Existente'), class: 'btn btn-primary m-1' %>
+          <% end %>-->
+        <% end %>
+      </div>
+      <div id="questionForm">
+        <% if @type.nil? || @type == 'Trivia' %>
+          <%= render 'trivia_form' %>
+        <% end %>
+        <% if @type == 'Video Trivia' %>
+          <%= render 'video_trivia_form' %>
+          <% end %>
+        <% if @type == 'Video Test' %>
+          <%= render 'video_test_form' %>
+        <% end %>
+        <% if @type == 'Pregunta Abierta' %>
+          <%= render 'open_question_form' %>
+        <% end %>
+        <% if @type == 'Pregunta Existente' %>
+          <%= render 'existing_questions' %>
+        <% end %>
+      </div>
+    </div>
+  </div>

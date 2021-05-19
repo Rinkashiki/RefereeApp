@@ -1,0 +1,6 @@
+$('#flash').html("");
+$('#form-link').show();
+$('#form form').remove();
+$('#notification-block').attr("hidden", false);
+$('#notification').html("<%= @notification %>");
+$('#users').append("<%= j render @user %>");

@@ -1,0 +1,15 @@
+<div class="container form_padding">
+  <br>
+  <div class="form-group">
+      <h1>Add Topic</h1>
+      <p class="custom-select">
+        <h2>Topics</h2><br>
+        <% @topics.each do |t| %>
+          <div class="center topic-form rounded">
+            <%= t['description'] %>
+            <p class="center"><%= link_to 'Añadir', add_topic_post_path(:topic => t['id']), class: 'btn btn-primary' %></p>
+          </div>   
+        <% end %>
+      </p>
+  </div>
+</div>

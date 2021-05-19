@@ -1,0 +1,9 @@
+<div class="col-xs-1 col-md-3 elem rounded">
+    <p>Nombre: <%= user.name %></p>
+    <p>Apellidos: <%= user.surname %></p>
+    <p>E-mail: <%= user.email %></p>
+    <div class="center">
+      <%= link_to 'Editar', edit_user_path(user), class: 'btn btn-primary' %>
+      <%= button_to 'Eliminar', user_path(user), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+<div class="center">
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+      <%= msg %>
+    </div>
+  <% end %>
+  <% flash.delete(:alert) %>
+  <div hidden id="notification-block" class="center">
+      <div id="notification" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+      </div>
+    </div>
+  <h1 class="center">Actividades</h1>
+</div>
+  <div id="activities" class="row">
+    <%= render @activities %>
+  </div>
+  <div id="new-activity" class="center mb-5">
+    <%= link_to 'Crear actividad', new_activity_path, remote: true, class: 'btn btn-primary' %>
+  </div>
+  <div id="activity-form">
+  </div>
+</div>

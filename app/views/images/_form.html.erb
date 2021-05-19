@@ -1,0 +1,10 @@
+<br>
+<%= form_for @image, remote:true do |f| %>
+  <%= f.label :Nombre %><br>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :Descripción %><br>
+  <%= f.text_field :description %>
+  <br>
+  <%= f.submit %>
+<% end %>

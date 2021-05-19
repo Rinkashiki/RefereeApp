@@ -1,0 +1,27 @@
+<div class="container">
+<div class="center">
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+      <%= msg %>
+    </div>
+  <% end %>
+  <% flash.delete(:alert) %>
+  <h1 class="center">Resultados <%= @activity.name %></h1>
+</div>
+<div class="row">
+  <% @users.each_with_index do |u, i| %>
+    <div class="col-xs-1 col-md-3 elem rounded">
+      <div class="center">
+        <p>Nombre: <%= u['name'] %></p>
+        <p>Apellidos: <%= u['surname'] %></p>
+        <p>E-mail: <%= u['email'] %></p>
+        <% if @activities_users[i]['status'] == "Finalizada" %>
+          <p>Nota: <%= @activities_users[i]['user_grade'] %></p>
+          <%= link_to 'Resultados de este usuario', user_results_path(user: u['id'], activity: @activity.id), class: 'btn btn-primary' %>
+        <% else %>
+          <p>Nota: Actividad aún no realizada</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

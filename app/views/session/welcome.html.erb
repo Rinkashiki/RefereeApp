@@ -1,0 +1,20 @@
+<div class="center offset-top">
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+      <%= msg %>
+    </div> 
+  <% end %>
+  <% flash.delete(:alert) %>
+  <div hidden id="notification-block" class="center">
+    <div id="notification" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+    </div>
+  </div>
+  <h1>¡Bienvenido!</h1>
+  <div class="col-md-6 offset-md-3">
+    <%= link_to 'Login', '/login', remote: true, class: 'btn btn-primary' %>
+    <%= link_to 'Registrarse', new_user_path, remote: true, class: 'btn btn-primary' %>
+  </div>
+  </div>
+  <br>
+  <div id="form">
+  </div>

@@ -1,0 +1,21 @@
+<div class="container">
+<div class="center">
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+      <%= msg %>
+    </div>
+  <% end %>
+  <% flash.delete(:alert) %>
+  <h1 class="center">Actividades: Evaluación</h1>
+</div>
+<div class="row">
+  <% @activities.each do |a| %>
+    <div class="col-xs-1 col-md-3 elem rounded">
+      <p class="center">Nombre: <%= a.name %></p>
+      <p class="center">Responsable: <%= a.responsible %></p>
+      <div class="center">
+        <%= link_to 'Resultados', results_path(activity: a.id), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

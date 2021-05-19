@@ -1,0 +1,61 @@
+<br>
+<div class="container center">
+  <h2>Video Trivia</h2><br>
+  <div>
+    <h3>Video</h3>
+    <p><%= video_tag @clip.video.to_s, autoplay: true, class: "video", id: "video" %></p>
+  </div>
+  <div class="not-visible", id="answer-content">
+    <div class="elem activity rounded">
+      <p>Pregunta: <%= @question.question %></p>
+      <p>Tiempo para responder: <%= @question.response_time %>s</p>
+    </div>
+    <div>
+      <h2 class="timer center rounded" id="timer"><%= "0" + (@question.response_time / 60).round().to_s + ":" + (@question.response_time % 60).to_s %></h2><br>
+      <h3>Respuestas</h3>
+      <%= form_tag 'doing_activity_post', id: 'response' do %>
+        <% if !@answers.blank? %>
+          <% @answers.each do |a| %>
+            <div class="center topic bg-secondary rounded">
+              <%= check_box_tag 'answers_ids[]', a.id %>
+              &emsp;
+              <%= a.description %>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="center mb-5">
+          <%= hidden_field_tag :activity, @activity.id %>
+          <%= hidden_field_tag :n_question, @n_question%>
+          <% if @n_question < @total_questions - 1 %>
+            <%= submit_tag 'Siguiente', class: 'btn btn-primary', id: 'submit-response' %>
+          <% else %>
+            <%= submit_tag 'Finalizar actividad', class: 'btn btn-primary', id: 'submit-response' %>
+          <% end %>
+        </div> 
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#video').on('ended', function(){
+      $('#answer-content').toggleClass('not-visible');
+      var countdown = <%= @question.response_time.to_i %>
+      var x = setInterval(function() {
+        --countdown
+        if (countdown % 60 < 10){
+          $('#timer').html("0" + Math.floor(countdown / 60) + ":" + "0" + countdown % 60);
+        }    
+        else{
+          $('#timer').html("0" + Math.floor(countdown / 60) + ":" + countdown % 60);
+        }
+
+        if(countdown <= 0){
+          document.getElementById("response").submit();
+        }
+      }, 1000);
+    });
+  });
+</script>

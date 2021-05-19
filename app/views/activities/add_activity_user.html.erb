@@ -1,0 +1,17 @@
+<br>
+    <div class="container">
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-danger alert-dismissible d-inline-block" role="alert">
+            <%= msg %>
+          </div> 
+        <% end %>
+        <% flash.delete(:alert) %>
+        <h1 class="center">Añadir usuario a actividad</h1><br>
+        <% @users.each do |u| %>
+          <div class="center topic bg-secondary rounded">
+            <p>Nombre: <%= u.name %></p>
+            <p>Surname: <%= u.surname %></p>
+            <%= link_to 'Añadir usuario', add_activity_user_post_path(user: u[ :id]), class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+    </div>

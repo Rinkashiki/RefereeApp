@@ -1,0 +1,21 @@
+<%= stylesheet_link_tag 'users' %>
+<div class="container form_padding">
+  <br>
+  <div class="form-group">
+    <div class="row">
+    <%= form_for @clip do |c| %>
+      <h1>Edit Decision</h1>
+      <p class="custom-select">
+        <%= c.label :decision %><br>
+        <%= c.select :decision, @decisions.map{|d| [d.description]} %>
+      </p>
+      <h1>Edit Sanction</h1>
+      <p class="custom-select">
+        <%= c.label :sanction %><br>
+        <%= c.select :sanction, @sanctions.map{|s| [s.description]} %>
+      </p>
+      <p><%= c.submit 'Edit', class: 'btn btn-primary' %></p>
+    <% end %>
+    </div>
+  </div>
+</div>

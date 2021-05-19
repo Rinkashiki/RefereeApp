@@ -1,0 +1,73 @@
+<div class="container">
+  <br>
+  <div class="center handheld_display">
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+        <%= msg %>
+      </div> 
+    <% end %>
+    <% flash.delete(:alert) %>
+    <p>Nombre: <%= @clip.clipName %></p>
+    <p>Usuario: <%= @clip.uploadUser %></p>
+    <% if !@decision.blank? %>
+      <p>Decisión: <span class="bg-light text-dark"><%= @decision.description + " " + @decision.initials %></span></p>
+    <% else %>
+      <p>Decisión: <span class="bg-light text-dark">Ninguna</span></p> 
+    <% end %>
+    <% if !@sanction.blank? %>
+      <p>Sanción:  <span class="bg-light text-dark"><%= @sanction.description + " " + @sanction.initials %></span></p>
+    <% else %>
+      <p>Sanción:  <span class="bg-light text-dark">Ninguna</span></p> 
+    <% end %>
+    <p><%= link_to 'Edit', edit_clip_path(@clip), class: "btn btn-primary" %></p>
+    <p><%= video_tag @clip.video.to_s, controls: true, class: "video" %></p>
+      <div>
+        <h3 class="text-white">Pregunta</h3>
+        <% if !@question.nil? %>
+          <p class="center topic question bg-secondary rounded">
+            <%= @question.question %>
+            &emsp;
+            <%= link_to '-', quit_question_path, class: 'btn btn-primary' %>
+          </p>
+          <h3 class="text-white">Respuestas</h3>
+          <% if !@answers.nil? %>
+            <% @answers.each do |a| %>
+              <% if a.option == "Falso" %>
+                <div class="center topic question wrong-answer rounded">
+                  <%= a.description %>
+                  &emsp;
+                  <%= button_to '-', answer_path(a, clip: @clip, question: @question), method: :delete, class: 'btn btn-primary' %>
+                </div>
+              <% else %>
+                <div class="center topic question correct-answer rounded">
+                  <%= a.description %>
+                  &emsp;
+                  <%= button_to '-', answer_path(a, clip: @clip, question: @question), method: :delete, class: 'btn btn-primary' %>
+                </div>
+              <% end %>
+            <% end %>
+            <% if @answers.length() < 10 && @question.question_type != "Pregunta Abierta"%>
+              <p class='m-3'><%= link_to 'Añadir respuesta', new_answer_path(question: @question.id, clip: @clip.id), class: 'btn btn-primary' %></p>
+            <% end %>
+          <% end %>
+        <% else %>
+          <p><%= link_to 'Añadir', new_question_path(clip: @clip), class: "btn btn-primary" %></p>
+        <% end %>
+      </div>
+    <br>
+    <div>
+      <br>
+      <% if Topic.any? %>
+        <h3 class="text-white">Topics</h3>
+        <% @topics.each do |t| %>
+          <div class="center topic question bg-secondary rounded">
+            <%= t['description'] %> <!--:topic => t['id']-->
+            &emsp;
+            <%= link_to '-', quit_topic_path(:topic => t['id']), class: 'btn btn-primary' %>
+          </div>
+        <% end %> 
+        <%= link_to '+', add_topic_path(), class: 'btn btn-primary mb-5' %>
+      <% end %>
+    </div>
+  </div>
+</div>

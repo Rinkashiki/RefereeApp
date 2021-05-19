@@ -1,0 +1,94 @@
+<div class="container">
+  <br>
+  <div class="center handheld_display">
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+        <%= msg %>
+      </div> 
+    <% end %>
+    <% flash.delete(:alert) %>
+    <h1>Actividad finalizada</h1><br>
+    <% @questions.each_with_index do |q, i| %>
+      <br>
+      <h2>Pregunta <%= i + 1 %></h2>
+      <div class="center">
+        <div class="elem topic bg-secondary rounded">
+          <p>Pregunta: <%= q.question %></p>
+          <p>Tipo de pregunta: <%= q.question_type %></p>
+        </div>
+        <div>
+          <% if q.question_type == "Trivia" ||  q.question_type == "Video Trivia" %>
+            <h3>Respuestas</h3>
+            <% Answer.where(question_id: q.id).each_with_index do |a| %>
+              <% if !@user_answers[i]['answers'].nil? && @user_answers[i]['answers'].include?(a.id.to_s) %>
+                <% if a.option == "Falso" %>
+                  <div class="center topic question wrong-answer rounded">
+                    <%= a.description %>  
+                  </div>
+                <% else %>
+                  <div class="center topic question correct-answer rounded">
+                    <%= a.description %>  
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="center topic question bg-secondary rounded">
+                  <%= a.description %>  
+                </div>
+              <% end %>
+            <% end %>
+            <% if @user_answers[i]['answers'].nil? %>
+              <div class="center topic question bg-secondary rounded">
+                <p> Pregunta no respondida </p>  
+              </div>
+            <% end %>
+          <% end %>
+          <% if q.question_type == "Video Test" %>
+            <h3>Decisión</h3>
+            <% if !@user_answers[i]['decision_id'].nil? %>
+              <% if @decisions[i] !=  @user_answers[i]['decision_id'] %>
+                <div class="center topic question wrong-answer rounded">
+                  <%= Decision.find(@user_answers[i]['decision_id']).description %>  
+                </div>
+              <% else %>
+                <div class="center topic question correct-answer rounded">
+                  <%= Decision.find(@user_answers[i]['decision_id']).description %>  
+                </div>
+              <% end %>
+            <% else %>
+              <div class="center topic question bg-secondary rounded">
+                <p>Pregunta no respondida</p>  
+              </div>
+            <% end %>
+            <h3>Sanción</h3>
+            <% if !@user_answers[i]['sanction_id'].nil? %>
+              <% if @sanctions[i] !=  @user_answers[i]['sanction_id'] %>
+                <div class="center topic question wrong-answer rounded">
+                  <%= Sanction.find(@user_answers[i]['sanction_id']).description %>  
+                </div>
+              <% else %>
+                <div class="center topic question correct-answer rounded">
+                  <%= Sanction.find(@user_answers[i]['sanction_id']).description %>  
+                </div>
+              <% end %>
+            <% else %>
+              <div class="center topic question bg-secondary rounded">
+                <p>Pregunta no respondida</p>  
+              </div>
+            <% end %>
+          <% end %>
+          <% if q.question_type == "Pregunta Abierta" %>
+            <% if !@user_answers[i]['open_question'].nil? %>
+              <div class="center topic question bg-secondary rounded">
+                <%= @user_answers[i]['open_question'] %>  
+              </div>
+            <% else %>
+              <div class="center topic question bg-secondary rounded">
+                <p>Pregunta no respondida</p>  
+              </div>
+            <% end %>
+          <% end %>
+        <div>
+      </div>
+    <% end %>
+  </div>
+</div>

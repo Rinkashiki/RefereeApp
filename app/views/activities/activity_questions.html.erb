@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="center">
+  <br>
+  <div class="center handheld_display">
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+        <%= msg %>
+      </div> 
+    <% end %>
+    <% flash.delete(:alert) %>
+    <h1><%= @activity.name %></h1><br>
+    <h2>Preguntas</h2>
+    <%= render @questions %>
+  </div>
+  <div class="center m-5">
+    <%= link_to 'Añadir Pregunta', new_question_path(activity: @activity), class: "btn btn-primary" %>
+  </div>
+</div>

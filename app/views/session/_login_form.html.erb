@@ -1,0 +1,19 @@
+<div class="container form_padding">
+  <br>
+  <div class="form-group">
+    <%= form_tag '/login' do %>
+      <h1>Log in</h1>
+      <p>
+        <%= label_tag :Nombre %><br>
+        <%= text_field_tag :name %>
+      </p>
+      <p>
+        <%= label_tag :Contraseña %><br>
+        <%= text_field_tag :password %>
+      </p>
+      <p>
+        <%= submit_tag 'Login', class: 'btn btn-primary' %>
+      </p>
+    <% end %>
+  </div>
+</div>

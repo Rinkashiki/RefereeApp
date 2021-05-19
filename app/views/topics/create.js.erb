@@ -1,0 +1,6 @@
+$('#flash').html();
+$('#new-topic').show();
+$('#topic-form form').remove();
+$('#notification-block').attr("hidden", false);
+$('#notification').html("<%= @notification %>");
+$('#topics').append("<%= j render @topic %>");

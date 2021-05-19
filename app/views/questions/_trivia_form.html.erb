@@ -1,0 +1,36 @@
+    <br>
+    <div class="form-group">
+      <%= form_for @question do |f| %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-danger alert-dismissible d-inline-block" role="alert">
+            <%= msg %>
+          </div> 
+        <% end %>
+        <% flash.delete(:alert) %>
+        <h1>Trivia</h1>
+        <p>
+          <%= f.label :question, class: 'text-white' %><br>
+          <%= f.text_field :question, class: 'textBox' %>
+        </p>
+        <p>
+          <%= f.label :response_time, class: 'text-white' %><br>
+          <%= f.number_field :response_time, class: 'textBox', value: 20 %>
+        </p>
+        <% if !@activity.nil? %>
+          <%= hidden_field_tag(:activity, @activity.id) %>
+        <% end %>  
+        <% if !@clip.nil? %>
+          <%= hidden_field_tag(:clip, @clip) %>
+        <% end %>
+        <!--<div class="mt-3">
+          <h2>Respuestas</h2>
+          <% if !@answers.nil? %>
+            <% render @answers %>
+          <% end %>
+          <%= link_to 'Añadir Respuesta', new_answer_path(format: 'js'), remote: true, class: 'btn btn-primary' %>
+          <div id="answerForm">
+          </div>
+        </div>-->
+        <p class="mt-4"><%= f.submit 'Añadir Pregunta', class: 'btn btn-primary' %></p>
+      <% end %>
+    </div>

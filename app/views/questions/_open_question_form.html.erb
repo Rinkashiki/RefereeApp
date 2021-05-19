@@ -1,0 +1,28 @@
+    <br>
+    <div class="form-group">
+      <%= form_for @question do |f| %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-danger alert-dismissible d-inline-block" role="alert">
+            <%= msg %>
+          </div> 
+        <% end %>
+        <% flash.delete(:alert) %>
+        <h2>Pregunta abierta</h2><br>
+        <p>
+        <%= f.label :question, class: 'text-white' %><br>
+        <%= f.text_field :question, class: 'textBox' %><br>
+        </p>
+        <p>
+        <%= f.label :response_time, class: 'text-white' %><br>
+        <%= f.number_field :response_time, value: 60, class: 'textBox' %>
+        </p>
+        <% if !@activity.nil? %>
+          <%= hidden_field_tag(:activity, @activity.id) %>
+        <% end %>
+        <%= hidden_field_tag(:type, @type) %>
+        <% if !@clip.nil? %>
+          <%= hidden_field_tag(:clip, @clip) %>
+        <% end %>
+        <p class="mt-3"><%= f.submit 'Añadir Pregunta', class: 'btn btn-primary' %></p>
+      <% end %>
+    </div>

@@ -1,0 +1,25 @@
+<div class="container">
+  <br>
+  <div class="center handheld_display">
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+        <%= msg %>
+      </div> 
+    <% end %>
+    <% flash.delete(:alert) %>
+    <h1>Actividad</h1>
+    <div class="elem activity rounded">
+      <p>Nombre: <%= @activity.name %></p>
+      <p>Responsable: <%= @activity.responsible %></p>
+      <p>Fecha de inicio: <%= @activity.initial_date.strftime("%d/%m/%Y") %></p>
+      <p>Fecha de fin: <%= @activity.final_date.strftime("%d/%m/%Y") %></p>
+      <p>Fecha de resultado: <%= @activity.result_date.strftime("%d/%m/%Y") %></p>
+      <p>Nota de corte: <%= @activity.grade %></p>
+      <p><%= link_to 'Fechas y nota', edit_activity_path(@activity), class: "btn btn-primary" %></p>
+      <p>
+        <%= link_to 'Preguntas', activity_questions_path(activity: @activity), class: "btn btn-primary" %>
+        <%= link_to 'Usuarios', activity_users_path, class: "btn btn-primary" %>
+      </p>
+    </div>
+  </div>
+   

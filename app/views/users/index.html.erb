@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="center">
+    <% flash.each do |type, msg| %>
+      <div id="flash" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+        <%= msg %>
+      </div>
+    <% end %>
+    <% flash.delete(:alert) %>
+    <div hidden id="notification-block" class="center">
+      <div id="notification" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+      </div>
+    </div>
+  </div>
+  <h1 class="center">Usuarios</h1>
+  <div id="users" class="row">
+    <%= render @users %>
+  </div>
+  <div id="form-link" class="center mb-5">
+    <%= link_to 'Dar de alta', new_user_path, remote: true, class: 'btn btn-primary' %>
+  </div>
+  <div id="form">
+  </div>
+</div>

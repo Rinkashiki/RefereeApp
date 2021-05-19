@@ -1,0 +1,20 @@
+<div class="container form_padding">
+  <br>
+  <div class="form-group">
+    <%= form_for @clip do |c| %>
+      <h1>Change Decision</h1>
+      <p class="custom-select">
+        <%= c.label :decision %><br>
+        <select :decision>
+          <option value="NF">No Falta</option>
+          <option value="TLI">Tiro Libre Indirecto</option>
+          <option value="TLD">Tiro Libre Directo</option>
+          <option value="TP">Tiro Penal</option>
+        </select>
+      </p>
+      <p>
+        <%= c.submit 'Cambiar', class: 'btn btn-primary' %>
+      </p>
+    <% end %>
+  </div>
+</div>

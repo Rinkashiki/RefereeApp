@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'navbar' %>
+
+  </head>
+
+  <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <div class="wrapper">
+      <nav id="sidebar">
+        <div class="sidebar-header">
+          <div class="container-fluid">
+            <h3>Menú</h3>
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <div class="menu_icon"></div>
+              <div class="menu_icon"></div>
+              <div class="menu_icon"></div>
+            </button>
+          </div>
+        </div>
+          <a id="toolCollapse" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Herramientas</a>
+          <ul class="list-unstyled collapse" id="toolSubmenu">
+            <li>
+              <a href="/activities">Actividades</a>
+            </li>
+          </ul>
+          <a href="/activities_users">Mis Actividades</a>
+          <a href="/evaluation">Evaluación</a>
+          <a id="adminCollapse" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Administración</a>
+          <ul class="list-unstyled collapse" id="adminSubmenu">
+            <li>
+              <a href="/users">Usuarios</a>
+            </li>
+            <li>
+              <a href="/clips">Clips</a>
+            </li>
+            <li>
+              <a href="/topics">Topics</a>
+            </li>
+          </ul>
+          <a href="/welcome">Logout</a>
+      </nav>
+      <%= yield %>
+    </div>
+  </body>
+</html>

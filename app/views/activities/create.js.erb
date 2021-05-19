@@ -1,0 +1,6 @@
+$('#flash').html();
+$('#new-activity').show();
+$('#activity-form form').remove();
+$('#notification-block').attr("hidden", false);
+$('#notification').html("<%= @notification %>");
+$('#activities').append("<%= j render @activity %>");

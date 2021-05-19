@@ -1,0 +1,58 @@
+  <div class="container form_padding">
+    <br>
+    <div>
+      <%= form_for @clip, html: {id: "uploadForm"} do |c| %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+            <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <%= msg %>
+          </div>
+        <% end %>
+        <% flash.delete(:alert) %>
+        <h2>Upload Clip</h2>
+        <p>
+          <%= c.label :video %><br>
+          <%= c.file_field :video, accept: 'video/mp4', id: 'uploadVideo'%>
+        </p>
+        <p>
+          <%= c.submit 'Subir clip', class: 'btn btn-primary' %>
+        </p>
+        <div class="progress" style="width:40vw">
+          <div id="progressBar" class="progress-bar" role:"progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            0%
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#uploadForm').submit(function(event){
+        /event.preventDefault();/
+        $.ajax({
+          xhr : function(){
+            var xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener('progress', function(e){
+              if(e.lengthComputable){
+                var percent = Math.round((e.loaded / e.total) * 100);
+                $('#progressBar').attr('aria-valuenow', percent).css('width', percent + '%').text(percent + '%');
+              }
+            });
+            return xhr;
+          },
+          type : 'POST',
+          url : '/clips',
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+          data : new FormData($("#uploadVideo").files),
+          processData : false,
+          contentType : false,
+          success : function(){
+            alert('Video uploaded!');
+          }
+        });
+      });
+      return false;
+    });
+  </script>

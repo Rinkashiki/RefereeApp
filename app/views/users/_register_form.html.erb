@@ -1,0 +1,46 @@
+
+  <div class="container form_padding">
+    <br>
+    <div class="form-group">
+      <%= form_for @user, remote: true do |f| %>
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-danger alert-dismissible d-inline-block" role="alert">
+            <%= msg %>
+          </div> 
+        <% end %>
+        <% flash.delete(:alert) %>
+        <% if !@user[ :name].blank? %>
+          <h1>Edit User</h1>
+        <% else %>
+          <h1>Sign Up</h1>
+        <% end %>
+        <p>
+          <%= f.label :Nombre %><br>
+          <%= f.text_field :name, class: "textBox" %>
+        </p>
+        <p>
+          <%= f.label :Apellidos %><br>
+          <%= f.text_field :surname, class: "textBox" %>
+        </p>
+        <p>
+          <%= f.label :Email %><br>
+          <%= f.text_field :email, class: "textBox" %>
+        </p>
+        <% if logged_in? %>
+          <p class="custom-select">
+            <%= f.label :Perfil %><br>
+            <%= f.select :profile, @profiles.map{|p| [p.name]} %>
+          </p>
+        <% end %>
+        <% if !@user[ :name].blank? %>
+          <p>
+            <%= f.submit 'Editar', class: 'btn btn-primary' %>
+          </p>
+        <% else %>
+          <p>
+            <%= f.submit 'Dar de alta', class: 'btn btn-primary' %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>

@@ -1,0 +1,16 @@
+switch (@type){
+        case 'Trivia':
+            $("#questionForm").html("<%= j render(partial: 'trivia_form') %>");
+            break;
+        case 'Video Trivia':
+            $("#questionForm").html("<%= j render(partial: 'video_trivia_form') %>");
+            break;
+        case 'Video Test':
+            $("#questionForm").html("<%= j render(partial: 'video_test_form') %>");
+            break;
+        case 'Pregunta Abierta':
+            $("#questionForm").html("<%= j render(partial: 'open_question_form') %>");
+            break;
+        default:
+            break;
+    }  

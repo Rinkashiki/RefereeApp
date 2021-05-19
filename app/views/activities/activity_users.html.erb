@@ -1,0 +1,25 @@
+<div class="container">
+    <br>
+    <div class="center handheld_display">
+        <% flash.each do |type, msg| %>
+          <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+            <%= msg %>
+          </div> 
+        <% end %>
+        <% flash.delete(:alert) %>
+        <h1 class="center">Usuarios en esta actividad</h1><br>
+        <% @users.each do |u| %>
+          <div class="center topic bg-secondary rounded">
+            <p>Nombre: <%= u.name %></p>
+            <p>Surname: <%= u.surname %></p>
+            <p><%= link_to 'Editar fechas para este usuario', edit_activity_user_path(user: u[ :id]), class: 'btn btn-primary' %></p>
+            <p><%= link_to 'Quitar usuario', quit_activity_user_path(user: u[ :id]), class: 'btn btn-primary' %></p>
+          </div>
+        <% end %>
+        <% if @users.length() < User.all.length() - 1 %>
+          <div class="center mb-5">
+            <%= link_to 'Añadir usuario', add_activity_user_path, class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+    </div>
+</div>
