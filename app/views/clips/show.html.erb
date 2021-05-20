@@ -2,24 +2,41 @@
   <br>
   <div class="center handheld_display">
     <% flash.each do |type, msg| %>
-      <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+      <div id="flash" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
         <%= msg %>
       </div> 
     <% end %>
     <% flash.delete(:alert) %>
+    <div hidden id="notification-block" class="center">
+      <div id="notification" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+      </div>
+    </div>
     <p>Nombre: <%= @clip.clipName %></p>
     <p>Usuario: <%= @clip.uploadUser %></p>
     <% if !@decision.blank? %>
-      <p>Decisión: <span class="bg-light text-dark"><%= @decision.description + " " + @decision.initials %></span></p>
+      <p>
+        Decisión: <span id="decision" class="bg-light text-dark"><%= @decision.description + " " + @decision.initials %></span>
+        <%= link_to 'Editar', edit_decision_path, remote: true, id: "edit-decision", class: "btn btn-primary" %>
+      </p>
     <% else %>
-      <p>Decisión: <span class="bg-light text-dark">Ninguna</span></p> 
+      <p>
+        Decisión: <span class="bg-light text-dark">Ninguna</span>
+        <%= link_to 'Editar', edit_decision_path, remote: true, id: "edit-decision", class: "btn btn-primary" %>
+      </p> 
     <% end %>
+    <div id="decision-form">
+    </div>
     <% if !@sanction.blank? %>
-      <p>Sanción:  <span class="bg-light text-dark"><%= @sanction.description + " " + @sanction.initials %></span></p>
+      <p>Sanción:  <span id="sanction" class="bg-light text-dark"><%= @sanction.description + " " + @sanction.initials %></span>
+      <%= link_to 'Editar', edit_sanction_path, remote: true, id: "edit-sanction", class: "btn btn-primary" %>
+    </p>
     <% else %>
-      <p>Sanción:  <span class="bg-light text-dark">Ninguna</span></p> 
+      <p>Sanción:  <span class="bg-light text-dark">Ninguna</span>
+      <%= link_to 'Editar', edit_sanction_path, remote: true, id: "edit-sanction", class: "btn btn-primary" %>
+    </p> 
     <% end %>
-    <p><%= link_to 'Edit', edit_clip_path(@clip), class: "btn btn-primary" %></p>
+    <div id="sanction-form">
+    </div>
     <p><%= video_tag @clip.video.to_s, controls: true, class: "video" %></p>
       <div>
         <h3 class="text-white">Pregunta</h3>

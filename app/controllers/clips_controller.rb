@@ -1,13 +1,14 @@
 class ClipsController < ApplicationController
 
 	# Render navigation bar
-  layout 'in_session', only: [ :index, :show, :new, :edit, :add_topic]
+  layout 'in_session', only: [ :index, :show, :new, :edit, :add_topic ]
 
   # Check user is logged
   before_action :authorized 
 
   # Extract the current clip before any method is executed
-  before_action :set_clip, only: [ :show, :destroy, :edit, :update, :add_topic, :add_topic_post, :quit_topic, :quit_question]
+  before_action :set_clip, only: [ :show, :destroy, :edit_decision, :update_decision, :update_sanction, :add_topic, :add_topic_post, :quit_topic,
+   :quit_question]
   
   def index
     @clips = Clip.all
@@ -56,20 +57,36 @@ class ClipsController < ApplicationController
     end
   end
 
-  def edit
+  def edit_decision
     @decisions = Decision.all
+  end
+
+  def edit_sanction
     @sanctions = Sanction.all
   end
 
-  def update
-    @decision = Decision.find_by_description(params[ :clip][ :decision])
-    @sanction = Sanction.find_by_description(params[ :clip][ :sanction])
+  def update_decision
+    @decision = Decision.find_by_description(params[ :decision])
 
-    @clip.update(decision_id: @decision[ :id], sanction_id: @sanction[ :id])
+    @clip.update(decision_id: @decision[ :id])
 
-    flash[ :alert] = 'Succesfully edited!'
-
+    flash[ :alert] = 'Succesfully edited decision!'
     redirect_to @clip
+
+    #@notification = 'Succesfully edited decision'
+    #respond_to :js
+  end
+
+  def update_sanction
+    @sanction = Sanction.find_by_description(params[ :sanction])
+
+    @clip.update(sanction_id: @sanction[ :id])
+
+    flash[ :alert] = 'Succesfully edited sanction'
+    redirect_to @clip
+
+    #@notification = 'Succesfully edited sanction'
+    #respond_to :js
   end
 
   def destroy

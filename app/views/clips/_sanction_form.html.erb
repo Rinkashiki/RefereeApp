@@ -1,0 +1,8 @@
+<%= form_with url: update_sanction_path do |c| %>
+  <p class="custom-select">
+    <%= c.label :Sanción %><br>
+    <%= c.select :sanction, @sanctions.map{|s| [s.description]} %>
+  </p>
+  <p><%= c.submit 'Editar', class: 'btn btn-primary' %></p>
+<% end %>
+ 

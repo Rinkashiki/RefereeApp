@@ -1,0 +1,8 @@
+<%= form_with url: update_decision_path do |c| %>
+  <p class="custom-select">
+    <%= c.label :Decisión %><br>
+    <%= c.select :decision, @decisions.map{|d| [d.description]} %>
+  </p>
+  <p><%= c.submit 'Editar', class: 'btn btn-primary' %></p>
+<% end %>
+    

@@ -34,17 +34,15 @@ class UsersController < ApplicationController
     password = SecureRandom.alphanumeric
     @user[ :password] = CRYPT.encrypt_and_sign(password)
     
-    respond_to do |format|
-      if @user.save
-        # Send an email to new registered user with him/her credentials
-        UserMailer.with(user: @user, password: password).new_user_email.deliver_later
-        @notification = 'Succesfully registered!'
-      else
-        @notification = @user.errors.first.full_message
-      end
-
-      format.js
+    if @user.save
+      # Send an email to new registered user with him/her credentials
+      UserMailer.with(user: @user, password: password).new_user_email.deliver_later
+      @notification = 'Succesfully registered!'
+    else
+      @notification = @user.errors.first.full_message
     end
+
+      respond_to :js
 
   end
 

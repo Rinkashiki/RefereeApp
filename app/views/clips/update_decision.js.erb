@@ -1,0 +1,6 @@
+$('#flash').html();
+$('#edit-decision').show();
+$('#decision-form form').remove();
+$('#notification-block').attr("hidden", false);
+$('#notification').html("<%= @notification %>");
+$('#decision').html("<%= @decision.description + " " + @decision.initials %>");

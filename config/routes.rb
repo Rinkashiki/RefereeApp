@@ -29,6 +29,14 @@ Rails.application.routes.draw do
 
   get 'clips/:id/quit_question', to: 'clips#quit_question', as: 'quit_question'
 
+  get 'clips/:id/edit_decision', to: 'clips#edit_decision', as: 'edit_decision'
+
+  get 'clips/:id/edit_sanction', to: 'clips#edit_sanction', as: 'edit_sanction'
+
+  post 'clips/:id/update_decision', to: 'clips#update_decision', as: 'update_decision'
+
+  post 'clips/:id/update_sanction', to: 'clips#update_sanction', as: 'update_sanction'
+
   # Routes for topics
   resources :topics, only: [ :new, :create, :index, :edit, :update, :show, :destroy]
 
