@@ -46,10 +46,7 @@ class QuestionsController < ApplicationController
           @clip = params[ :clip]
         end
 
-        #respond_to do |format|
-            #format.html
-            #format.js
-        #end
+        respond_to :html, :js
     end
 
     def create
@@ -73,11 +70,7 @@ class QuestionsController < ApplicationController
       end
 
       # Determine question type
-        if params[ :type].nil?
-          @question[ :question_type] = "Trivia"
-        else
-          @question[ :question_type] = params[ :type]
-        end
+        @question[ :question_type] = params[ :type]
 
         if !@clip.nil?
           @question[ :clip_id] = params[ :clip]
@@ -93,10 +86,10 @@ class QuestionsController < ApplicationController
             if !params[ :activity].nil?
               # Question created from activity
               query = "INSERT into activities_questions (activity_id, question_id, created_at, updated_at) 
-              values ('#{@activity.id}', '#{@question.id}', now(), now())"
+              values ('#{@activity.id}', '#{@question.id}', DateTime('now'), DateTime('now'))"
               ActiveRecord::Base.connection.exec_query(query)
 
-              redirect_to @question
+              redirect_to activity_questions_path(id: params[ :activity])
             else
               # Question created from clip
               @clip.update(question_id: @question[ :id])

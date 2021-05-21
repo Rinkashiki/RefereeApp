@@ -23,10 +23,6 @@ class AnswersController < ApplicationController
         if !params[ :clip].nil?
           @clip = Clip.find params[ :clip]
         end
-
-        #respond_to do |format|
-            #format.js { render layout: false }
-        #end
     end
 
     def create
@@ -38,17 +34,12 @@ class AnswersController < ApplicationController
             @clip = Clip.find params[ :clip]
         end
 
-        #@question = Question.find(params[ :question])
-
         # Save answer in DB. Redirect to question if we have created the answer from question. 
         # Redirect to clip if we have created it from clip.
         if @answer.save
-            flash[ :alert] = "Succesfully created answer"
-            if !@clip.nil?
-              redirect_to @clip
-            else
-              redirect_to @question
-            end
+            @notification = "Succesfully created answer"
+            
+            respond_to :js
         else
             flash[ :alert] = @answer.errors.first.full_message
             if !@clip.nil?
@@ -56,11 +47,7 @@ class AnswersController < ApplicationController
             else
               redirect_to new_answer_path(question: params[ :question])
             end
-        end
-
-        #respond_to do |format|
-            #format.js { render layout: false }
-        #end      
+        end     
     end
 
     def show

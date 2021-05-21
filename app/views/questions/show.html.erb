@@ -2,7 +2,7 @@
   <br>
   <div class="center handheld_display">
     <% flash.each do |type, msg| %>
-      <div class="alert alert-success alert-dismissible d-inline-block" role="alert">
+      <div id="flash" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
         <%= msg %>
       </div> 
     <% end %>
@@ -26,26 +26,18 @@
     <div>
       <% if @question.question_type == "Trivia" ||  @question.question_type == "Video Trivia" %>
         <h2>Respuestas</h2>
-        <% if !@answers.blank? %>
-          <% @answers.each do |a| %>
-            <% if a.option == "Falso" %>
-              <div class="center topic question wrong-answer rounded">
-                <%= a.description %>  
-                &emsp;
-                <%= button_to '-', answer_path(a, question: @question[ :id]), method: :delete, class: 'btn btn-primary' %>
-              </div>
-            <% else %>
-            <div class="center topic question correct-answer rounded">
-                <%= a.description %>
-                &emsp;  
-                <%= button_to '-', answer_path(a, question: @question[ :id]), method: :delete, class: 'btn btn-primary' %>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
+        <div hidden id="notification-block" class="center">
+          <div id="notification" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+          </div>
+        </div>
+        <div id="answers">
+          <%= render @answers %>
+        </div>
         <% if @answers.length() < 10 %>
-          <p class='m-3'><%= link_to 'Añadir respuesta', new_answer_path(question: @question), class: 'btn btn-primary' %></p>
+          <p id="new-answer" class='m-3'><%= link_to 'Añadir respuesta', new_answer_path(question: @question), remote: true, class: 'btn btn-primary' %></p>
         <% end %>
+        <div id="answer-form">
+        </div>
       <% end %>
     </div>   
   </div>

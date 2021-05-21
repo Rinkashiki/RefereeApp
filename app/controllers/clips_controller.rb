@@ -1,13 +1,13 @@
 class ClipsController < ApplicationController
 
 	# Render navigation bar
-  layout 'in_session', only: [ :index, :show, :new, :edit, :add_topic ]
+  layout 'in_session', only: [ :index, :show, :edit, :add_topic ]
 
   # Check user is logged
   before_action :authorized 
 
   # Extract the current clip before any method is executed
-  before_action :set_clip, only: [ :show, :destroy, :edit_decision, :update_decision, :update_sanction, :add_topic, :add_topic_post, :quit_topic,
+  before_action :set_clip, only: [ :show, :destroy, :update_decision, :update_sanction, :add_topic, :add_topic_post, :quit_topic,
    :quit_question]
   
   def index
@@ -18,20 +18,31 @@ class ClipsController < ApplicationController
     @clip = Clip.new
   end
 
-  def create      
-    @clip = Clip.new clip_params
+  def create
+
+  params[ :videos].each do |v|
+
+    @clip = Clip.new(video: v)
   
-    @clip[ :clipName] = File.basename(params[ :clip][ :video].original_filename, '.mp4').truncate(20)
+    @clip[ :clipName] = File.basename(v.original_filename, '.mp4').truncate(20)
     @clip[ :uploadUser] = helpers.current_user[ :name]
 
+    @clip.save
+
+  end
+
+  flash[ :alert] = 'Successfully uploaded video/s'
+  redirect_to clips_path
+
     # Save clip in DB
-    if @clip.save
-      flash[ :alert] = 'Successfully uploaded video'
-      redirect_to new_clip_path
-    else
-      flash[ :alert] = @clip.errors.first.full_message
-      redirect_to new_clip_path
-    end
+    #if @clip.save
+      #flash[ :alert] = 'Successfully uploaded video'
+      #redirect_to clips_path
+    #else
+      #flash[ :alert] = @clip.errors.first.full_message
+      #redirect_to clips_path
+    #end
+
   end 
 
   def show

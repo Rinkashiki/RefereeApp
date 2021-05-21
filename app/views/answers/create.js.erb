@@ -1,0 +1,6 @@
+$('#flash').remove();
+$('#new-answer').show();
+$('#answer-form form').remove();
+$('#notification-block').attr("hidden", false);
+$('#notification').html("<%= @notification %>");
+$('#answers').append("<%= j render @answer %>");

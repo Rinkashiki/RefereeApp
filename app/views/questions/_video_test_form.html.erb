@@ -14,8 +14,7 @@
         </p>
         <div class="mt-3">
           <h2>Selecionar clip</h2>
-          <% if !@evaluated_clips.nil? %>
-            <% @evaluated_clips.each do |c| %>
+            <% Clip.where.not(decision_id: nil, sanction_id: nil).each do |c| %>
               <div class="col-xs-1 col-md-3 elem rounded">
                 <p class="center"><%= c.clipName %></p>
                 <p class="center"> <span class="bg-light text-dark"><%= Decision.find(c.decision_id).description %></span></p>
@@ -29,8 +28,7 @@
                   <%= f.submit 'Usar clip', class: 'btn btn-primary' %>
                 </div>
               </div>
-            <% end %>
-          <% end %>  
+            <% end %> 
       <% end %>
     </div>
     

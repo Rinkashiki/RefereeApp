@@ -16,6 +16,7 @@
           <%= f.label :response_time, class: 'text-white' %><br>
           <%= f.number_field :response_time, class: 'textBox', value: 20 %>
         </p>
+        <%= hidden_field_tag(:type, @type) %>
         <% if !@activity.nil? %>
           <%= hidden_field_tag(:activity, @activity.id) %>
         <% end %>  

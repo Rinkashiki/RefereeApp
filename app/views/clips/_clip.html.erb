@@ -3,6 +3,6 @@
   <p class="center">Usuario: <%= clip.uploadUser %></p>
   <div class="center">
     <%= link_to 'Mostrar', clip, class: 'btn btn-primary' %>
-    <%= button_to 'Eliminar', clip_path(clip), method: :delete, class: 'btn btn-primary' %>
+    <%= button_to 'Eliminar', clip_path(clip), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
   </div>
 </div>

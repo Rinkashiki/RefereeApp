@@ -1,0 +1,13 @@
+<% if answer.option == "Falso" %>
+  <div class="center topic question wrong-answer rounded">
+    <%= answer.description %>  
+    &emsp;
+    <%= button_to '-', answer_path(answer, question: @question[ :id]), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+  </div>
+<% else %>
+  <div class="center topic question correct-answer rounded">
+    <%= answer.description %>
+    &emsp;  
+    <%= button_to '-', answer_path(answer, question: @question[ :id]), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+  </div>
+<% end %>

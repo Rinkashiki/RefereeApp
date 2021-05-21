@@ -1,29 +1,22 @@
 <div class="container form_padding">
-    <br>
-    <h1>Añadir Respuesta</h1>
-    <div class="form-group">
-      <%= form_for @answer do |f| %>
-        <% flash.each do |type, msg| %>
-          <div class="alert alert-danger alert-dismissible d-inline-block" role="alert">
-            <%= msg %>
-          </div> 
-        <% end %>
-        <% flash.delete(:alert) %>
-        <p>
-          <%= f.label :description %><br>
-          <%= f.text_field :description, class: "textBox" %>
-        </p>
-        <p>
-          <%= f.label :option %><br>
-          <%= f.select :option, options_for_select(["Verdadero", "Falso"]) %>
-        </p>
-        <%= hidden_field_tag(:question, @question.id) %>
-        <% if !@clip.nil? %>
-          <%= hidden_field_tag(:clip, @clip.id) %>
-        <% end %>
-        <p>
-          <%= f.submit 'Añadir', class: 'btn btn-primary' %>
-         </p>
+  <br>
+  <div class="form-group">
+    <%= form_for @answer, remote: true do |f| %>
+      <p>
+        <%= f.label :Descripción %><br>
+        <%= f.text_field :description, class: "textBox" %>
+      </p>
+      <p>
+        <%= f.label :Opción %><br>
+        <%= f.select :option, options_for_select(["Verdadero", "Falso"]) %>
+      </p>
+      <%= hidden_field_tag(:question, @question.id) %>
+      <% if !@clip.nil? %>
+        <%= hidden_field_tag(:clip, @clip.id) %>
       <% end %>
-    </div>
+      <p>
+        <%= f.submit 'Añadir', class: 'btn btn-primary' %>
+      </p>
+    <% end %>
   </div>
+</div>

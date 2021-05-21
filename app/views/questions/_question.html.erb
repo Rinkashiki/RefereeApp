@@ -3,6 +3,6 @@
     <p>Tipo de pregunta: <%= question.question_type %></p>
     <p> 
       <%= link_to 'Mostrar', question_path(question), class: 'btn btn-primary' %>
-      <%= link_to 'Quitar Pregunta', quit_activity_question_path(question: question), class: 'btn btn-primary' %>
+      <%= link_to 'Quitar Pregunta', quit_activity_question_path(question: question), data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
     </p>
 </div>
