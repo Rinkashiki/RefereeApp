@@ -13,6 +13,8 @@ class AnswersController < ApplicationController
 
     def index
         @answers = Answer.all
+
+        respond_to :html, :js
     end
 
     def new

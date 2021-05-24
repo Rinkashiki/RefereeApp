@@ -12,6 +12,8 @@ class ClipsController < ApplicationController
   
   def index
     @clips = Clip.all
+
+    respond_to :html, :js
   end
 
   def new

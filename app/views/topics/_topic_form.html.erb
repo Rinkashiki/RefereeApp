@@ -11,7 +11,7 @@
         <% if !@topic[ :description].blank? %>
           <h1>Editar topic</h1>
         <% else %>
-          <h1>Nuevo topic</h1>
+          <p><%= link_to 'Ocultar formulario', topics_path, remote: true, class: 'btn btn-primary' %></p>
         <% end %>
         <p>
           <%= t.label :Descripción %><br>

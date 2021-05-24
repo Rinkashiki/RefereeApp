@@ -11,6 +11,9 @@ switch ("<%= @type %>"){
         case 'Pregunta Abierta':
             $("#questionForm").html("<%= j render partial: 'open_question_form' %>");
             break;
+        case 'Pregunta Existente':
+            $("#questionForm").html("<%= j render partial: 'existing_questions' %>");
+            break;
         default:
             break;
     }  

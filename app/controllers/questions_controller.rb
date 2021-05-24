@@ -136,12 +136,12 @@ class QuestionsController < ApplicationController
 
       # Associate selected question with the current activity
       query = "INSERT into activities_questions (activity_id, question_id, created_at, updated_at) 
-      values ('#{@activity.id}', '#{@question.id}', now(), now())"
+      values ('#{@activity.id}', '#{@question.id}', DateTime('now'), DateTime('now'))"
 
       ActiveRecord::Base.connection.exec_query(query)
 
       flash[ :alert] = 'Successfully added question'
-      redirect_to @question
+      redirect_to activity_questions_path(@activity.id)
 
     end
 

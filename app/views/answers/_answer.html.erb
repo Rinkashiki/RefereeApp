@@ -2,12 +2,20 @@
   <div class="center topic question wrong-answer rounded">
     <%= answer.description %>  
     &emsp;
-    <%= button_to '-', answer_path(answer, question: @question[ :id]), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+    <% if @clip.nil? %>
+      <%= button_to '-', answer_path(answer, question: @question.id), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+    <% else %>
+      <%= button_to '-', answer_path(answer, question: @question.id, clip: @clip.id), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+    <% end %>
   </div>
 <% else %>
   <div class="center topic question correct-answer rounded">
     <%= answer.description %>
-    &emsp;  
-    <%= button_to '-', answer_path(answer, question: @question[ :id]), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+    &emsp;
+    <% if !@clip.nil? %>  
+      <%= button_to '-', answer_path(answer, question: @question.id), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+    <% else %>
+      <%= button_to '-', answer_path(answer, question: @question.id, clip: @clip.id), method: :delete, data: {confirm:"¿Confirmar eliminación?"}, class: 'btn btn-primary' %>
+    <% end %>
   </div>
 <% end %>

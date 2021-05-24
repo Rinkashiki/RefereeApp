@@ -2,6 +2,7 @@
   <br>
   <div class="form-group">
     <%= form_for @answer, remote: true do |f| %>
+      <p><%= link_to 'Ocultar formulario', answers_path, remote: true, class: 'btn btn-primary' %></p>
       <p>
         <%= f.label :Descripción %><br>
         <%= f.text_field :description, class: "textBox" %>

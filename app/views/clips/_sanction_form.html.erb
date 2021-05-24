@@ -1,4 +1,5 @@
 <%= form_with url: update_sanction_path do |c| %>
+  <p><%= link_to 'Ocultar formulario', clips_path, remote: true, class: 'btn btn-primary' %></p>
   <p class="custom-select">
     <%= c.label :Sanción %><br>
     <%= c.select :sanction, @sanctions.map{|s| [s.description]} %>

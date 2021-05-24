@@ -1,4 +1,5 @@
 <%= form_with url: update_decision_path do |c| %>
+  <p><%= link_to 'Ocultar formulario', clips_path, remote: true, class: 'btn btn-primary' %></p>
   <p class="custom-select">
     <%= c.label :Decisión %><br>
     <%= c.select :decision, @decisions.map{|d| [d.description]} %>

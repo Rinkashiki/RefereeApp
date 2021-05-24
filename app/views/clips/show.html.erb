@@ -47,26 +47,18 @@
             <%= link_to '-', quit_question_path, class: 'btn btn-primary' %>
           </p>
           <h3 class="text-white">Respuestas</h3>
-          <% if !@answers.nil? %>
-            <% @answers.each do |a| %>
-              <% if a.option == "Falso" %>
-                <div class="center topic question wrong-answer rounded">
-                  <%= a.description %>
-                  &emsp;
-                  <%= button_to '-', answer_path(a, clip: @clip, question: @question), method: :delete, class: 'btn btn-primary' %>
-                </div>
-              <% else %>
-                <div class="center topic question correct-answer rounded">
-                  <%= a.description %>
-                  &emsp;
-                  <%= button_to '-', answer_path(a, clip: @clip, question: @question), method: :delete, class: 'btn btn-primary' %>
-                </div>
-              <% end %>
-            <% end %>
-            <% if @answers.length() < 10 && @question.question_type != "Pregunta Abierta"%>
-              <p class='m-3'><%= link_to 'Añadir respuesta', new_answer_path(question: @question.id, clip: @clip.id), class: 'btn btn-primary' %></p>
-            <% end %>
+          <div hidden id="notification-block" class="center">
+            <div id="notification" class="alert alert-warning alert-dismissible d-inline-block" role="alert">
+            </div>
+          </div>
+          <div id="answers">
+            <%= render @answers %>
+          </div>
+          <% if @answers.length() < 10 && @question.question_type != "Pregunta Abierta"%>
+            <p id="new-answer" class='m-3'><%= link_to 'Añadir respuesta', new_answer_path(question: @question.id, clip: @clip.id), remote: true, class: 'btn btn-primary' %></p>
           <% end %>
+          <div id="answer-form">
+          </div>
         <% else %>
           <p><%= link_to 'Añadir', new_question_path(clip: @clip), class: "btn btn-primary" %></p>
         <% end %>
@@ -78,7 +70,7 @@
         <h3 class="text-white">Topics</h3>
         <% @topics.each do |t| %>
           <div class="center topic question bg-secondary rounded">
-            <%= t['description'] %> <!--:topic => t['id']-->
+            <%= t['description'] %>
             &emsp;
             <%= link_to '-', quit_topic_path(:topic => t['id']), class: 'btn btn-primary' %>
           </div>

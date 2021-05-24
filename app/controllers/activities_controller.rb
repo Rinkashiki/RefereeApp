@@ -18,6 +18,8 @@ class ActivitiesController < ApplicationController
 
     def index
         @activities = Activity.where(responsible: helpers.current_user[ :name])
+
+        respond_to :html, :js
     end
 
     def new
@@ -40,12 +42,11 @@ class ActivitiesController < ApplicationController
 
           # Save activity in DB
           if @activity.save
-            flash[ :alert] = "Succesfully created activity"
-            redirect_to activities_path
+            @notification = "Succesfully created activity"
           else
-            flash[ :alert] = @activity.errors.first.full_message
-            redirect_to new_activity_path
+            @notification = @activity.errors.first.full_message
           end
+          respond_to :js
         else
             flash[ :alert] = "Activity name already used in another existing activity"
             redirect_to new_activity_path

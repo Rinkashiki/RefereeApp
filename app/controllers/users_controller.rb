@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+
+    respond_to :html, :js
   end
 
   # New user sign up by himself/herself. The assign profile is the default one (User)

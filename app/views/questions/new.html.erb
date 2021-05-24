@@ -20,8 +20,8 @@
           <%= link_to 'Pregunta Existente', new_question_path(type: 'Pregunta Existente', activity: @activity.id), remote: true, class: 'btn btn-primary m-1' %>
         <% end %>
       <% else %>
-        <%= link_to 'Trivia', new_question_path(type: 'Trivia', clip: @clip.id), remote: true, class: 'btn btn-primary m-1' %>
-        <%= link_to 'Pregunta Abierta', new_question_path(type: 'Pregunta Abierta', clip: @clip.id), remote: true, class: 'btn btn-primary m-1' %>
+        <%= link_to 'Trivia', new_question_path(type: 'Trivia', clip: @clip), remote: true, class: 'btn btn-primary m-1' %>
+        <%= link_to 'Pregunta Abierta', new_question_path(type: 'Pregunta Abierta', clip: @clip), remote: true, class: 'btn btn-primary m-1' %>
       <% end %>
     </div>
     <div id="questionForm">

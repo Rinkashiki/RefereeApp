@@ -8,6 +8,7 @@
           </div> 
         <% end %>
         <% flash.delete(:alert) %>
+        <p><%= link_to 'Ocultar formulario', activities_path, remote: true, class: 'btn btn-primary' %></p>
         <h1>Nueva Actividad</h1>
         <p>
           <%= a.label :Nombre %><br>

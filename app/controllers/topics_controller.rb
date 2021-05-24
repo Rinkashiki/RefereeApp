@@ -11,6 +11,8 @@ class TopicsController < ApplicationController
 
     def index
         @topics = Topic.all
+
+        respond_to :html, :js
     end
 
     def new
