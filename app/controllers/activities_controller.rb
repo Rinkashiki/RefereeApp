@@ -133,7 +133,7 @@ class ActivitiesController < ApplicationController
 
       query = "INSERT into activities_users (activity_id, user_id, user_initial_date, user_final_date, user_result_date,
        status, last_question, created_at, updated_at) values ('#{@activity.id}', '#{@user.id}', '#{@activity.initial_date.to_date}',
-       '#{@activity.final_date.to_date}', '#{@activity.result_date.to_date}', 'Disponible', 0, now(), now())"
+       '#{@activity.final_date.to_date}', '#{@activity.result_date.to_date}', 'Disponible', 0, DateTime('now'), DateTime('now'))"
       ActiveRecord::Base.connection.exec_query(query)
 
       flash[ :alert] = 'Successfully added user'

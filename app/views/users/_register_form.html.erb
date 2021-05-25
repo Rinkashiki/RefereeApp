@@ -10,7 +10,7 @@
         <% end %>
         <% flash.delete(:alert) %>
         <% if !@user[ :name].blank? %>
-          <h1>Edit User</h1>
+          <h1>Editar Usuario</h1>
         <% else %>
           <p><%= link_to 'Ocultar formulario', users_path, remote: true, class: 'btn btn-primary' %></p>
         <% end %>

@@ -74,8 +74,12 @@
             &emsp;
             <%= link_to '-', quit_topic_path(:topic => t['id']), class: 'btn btn-primary' %>
           </div>
-        <% end %> 
-        <%= link_to '+', add_topic_path(), class: 'btn btn-primary mb-5' %>
+        <% end %>
+        <div id="add-topic"> 
+          <%= link_to '+', add_topic_path(), remote: true, class: 'btn btn-primary mb-5' %>
+        </div>
+        <div id="topics">
+        </div>
       <% end %>
     </div>
   </div>

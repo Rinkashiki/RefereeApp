@@ -6,7 +6,7 @@
           </div> 
         <% end %>
         <% flash.delete(:alert) %>
-        <h1 class="center">Añadir usuario a actividad</h1><br>
+        <p><%= link_to 'Ocultar usuarios', activities_path, remote: true, class: 'btn btn-primary' %></p>
         <% @users.each do |u| %>
           <div class="center topic bg-secondary rounded">
             <p>Nombre: <%= u.name %></p>

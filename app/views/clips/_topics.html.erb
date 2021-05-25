@@ -1,9 +1,8 @@
 <div class="container form_padding">
   <br>
   <div class="form-group">
-      <h1>Add Topic</h1>
+      <p><%= link_to 'Ocultar formulario', clips_path, remote: true, class: 'btn btn-primary' %></p>
       <p class="custom-select">
-        <h2>Topics</h2><br>
         <% @topics.each do |t| %>
           <div class="center topic-form rounded">
             <%= t['description'] %>

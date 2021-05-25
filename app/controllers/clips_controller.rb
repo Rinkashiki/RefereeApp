@@ -122,7 +122,7 @@ class ClipsController < ApplicationController
     @topic = Topic.find params[ :topic]
 
     query = "INSERT into clips_topics (clip_id, topic_id, created_at, updated_at) 
-    values ('#{@clip.id}', '#{@topic.id}', now(), now())"
+    values ('#{@clip.id}', '#{@topic.id}', DateTime('now'), DateTime('now'))"
 
     ActiveRecord::Base.connection.exec_query(query)
 

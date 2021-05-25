@@ -94,10 +94,10 @@ class ActivitiesUsersController < ApplicationController
         if @question.question_type == "Trivia" || @question.question_type == "Video Trivia"
           if !params[ :answers_ids].nil?
             query = "INSERT into activity_user_answers (activities_users_id, answers, created_at, updated_at) 
-            values ('#{activity_user[0]['id']}', '#{params[ :answers_ids]}', now(), now())"
+            values ('#{activity_user[0]['id']}', '#{params[ :answers_ids]}', DateTime('now'), DateTime('now'))"
           else
             query = "INSERT into activity_user_answers (activities_users_id, created_at, updated_at) 
-            values ('#{activity_user[0]['id']}', now(), now())"
+            values ('#{activity_user[0]['id']}', DateTime('now'), DateTime('now'))"
           end
 
           ActiveRecord::Base.connection.exec_query(query)
@@ -107,16 +107,16 @@ class ActivitiesUsersController < ApplicationController
         if @question.question_type == "Video Test"
           if !params[ :user_decision].nil? && !params[ :user_sanction].nil?
             query = "INSERT into activity_user_answers (activities_users_id, decision_id, sanction_id, created_at, updated_at) 
-            values ('#{activity_user[0]['id']}', '#{params[ :user_decision]}', '#{params[ :user_sanction]}', now(), now())"
+            values ('#{activity_user[0]['id']}', '#{params[ :user_decision]}', '#{params[ :user_sanction]}', DateTime('now'), DateTime('now'))"
           elsif params[ :user_decision].nil? && !params[ :user_sanction].nil?
             query = "INSERT into activity_user_answers (activities_users_id, sanction_id, created_at, updated_at) 
-            values ('#{activity_user[0]['id']}', '#{params[ :user_sanction]}', now(), now())"
+            values ('#{activity_user[0]['id']}', '#{params[ :user_sanction]}', DateTime('now'), DateTime('now'))"
           elsif !params[ :user_decision].nil? && params[ :user_sanction].nil?
             query = "INSERT into activity_user_answers (activities_users_id, decision_id, created_at, updated_at) 
-            values ('#{activity_user[0]['id']}', '#{params[ :user_decision]}', now(), now())"
+            values ('#{activity_user[0]['id']}', '#{params[ :user_decision]}', DateTime('now'), DateTime('now'))"
           else
             query = "INSERT into activity_user_answers (activities_users_id, created_at, updated_at) 
-            values ('#{activity_user[0]['id']}', now(), now())"
+            values ('#{activity_user[0]['id']}', DateTime('now'), DateTime('now'))"
           end
 
           ActiveRecord::Base.connection.exec_query(query)
@@ -126,10 +126,10 @@ class ActivitiesUsersController < ApplicationController
         if @question.question_type == "Pregunta Abierta"
           if !params[ :open_question].nil?
             query = "INSERT into activity_user_answers (activities_users_id, open_question, created_at, updated_at) 
-            values ('#{activity_user[0]['id']}', '#{params[ :open_question]}', now(), now())"
+            values ('#{activity_user[0]['id']}', '#{params[ :open_question]}', DateTime('now'), DateTime('now'))"
           else
             query = "INSERT into activity_user_answers (activities_users_id, created_at, updated_at) 
-            values ('#{activity_user[0]['id']}', now(), now())"
+            values ('#{activity_user[0]['id']}', DateTime('now'), DateTime('now'))"
           end
 
           ActiveRecord::Base.connection.exec_query(query)
