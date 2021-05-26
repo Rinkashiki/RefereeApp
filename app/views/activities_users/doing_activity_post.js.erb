@@ -1,0 +1,17 @@
+switch ("<%= @question.question_type %>"){
+        case 'Trivia':
+            $("#question").html("<%= j render partial: 'doing_trivia' %>");
+            break;
+        case 'Video Trivia':
+            $("#question").html("<%= j render partial: 'doing_video_trivia' %>");
+            break;
+        case 'Video Test':
+            $("#question").html("<%= j render partial: 'doing_video_test' %>");
+            break;
+        case 'Pregunta Abierta':
+            $("#question").html("<%= j render partial: 'doing_open_question' %>");
+            break;
+        default:
+            break;
+    }
+

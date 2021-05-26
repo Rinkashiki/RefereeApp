@@ -78,7 +78,7 @@ class ActivitiesUsersController < ApplicationController
         where aq.activity_id = '#{@activity[ :id]}'"
         questions = Question.find_by_sql(query)
 
-        total_questions = questions.length()
+        @total_questions = questions.length()
 
         @n_question = params[ :n_question].to_i
 
@@ -135,14 +135,28 @@ class ActivitiesUsersController < ApplicationController
           ActiveRecord::Base.connection.exec_query(query)
         end
 
-        if @n_question < total_questions - 1 
+        if @n_question < @total_questions - 1
+
+          @n_question += 1
+          @question = questions[@n_question]
+
+          # Extract answers of the current question
+          @answers = Answer.where(question_id: @question.id)
+
+          # For Video Trivia and Video Test
+          if !@question.clip_id.nil?
+            @clip = Clip.find(@question.clip_id)
+          end
+
           # Update last_question in activity_user entry
-          query = "UPDATE activities_users SET last_question = '#{@n_question + 1}' WHERE activity_id = '#{params[ :activity]}' AND  
+          query = "UPDATE activities_users SET last_question = '#{@n_question}' WHERE activity_id = '#{params[ :activity]}' AND  
           user_id = '#{helpers.current_user[ :id]}'"
 
           ActiveRecord::Base.connection.exec_query(query)
 
-          redirect_to doing_activity_path(activity: @activity.id, n_question: @n_question + 1)
+          respond_to :js
+
+          #redirect_to doing_activity_path(activity: @activity.id, n_question: @n_question)
         else
           if Time.now.strftime("%d/%m/%Y") >= @activity.result_date.strftime("%d/%m/%Y")
             redirect_to finish_activity_path(activity: @activity.id)

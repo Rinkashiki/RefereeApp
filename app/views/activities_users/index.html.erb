@@ -18,14 +18,13 @@
               <p>Nota de corte: <%= a.grade %></p>
               <% if a.initial_date.strftime("%d/%m/%Y") == Time.now.strftime("%d/%m/%Y") && @activities_user[i]['status'] == 'Disponible'%>
                 <p><%= link_to 'Empezar actividad', doing_activity_path(activity: a.id, n_question: @activities_user[i]['last_question']), 
-                data: {confirm:"Va a comenzar la actividad '#{a.name}'. ¿Desea continuar?"}, class: 'btn btn-primary' %></p>
+                data: {confirm:"Va a comenzar la actividad #{a.name}. ¿Desea continuar?"}, class: 'btn btn-primary' %></p>
               <% end %>
               <% if Time.now.strftime("%d/%m/%Y") >= a.result_date.strftime("%d/%m/%Y") && @activities_user[i]['status'] == 'Finalizada'%>
                 <p><%= link_to 'Resultados', finish_activity_path(activity: a.id), class: 'btn btn-primary' %></p>
               <% end %>
               <% if a.initial_date.strftime("%d/%m/%Y") == Time.now.strftime("%d/%m/%Y") && @activities_user[i]['status'] == 'Pausada'%>
-                <p><%= link_to 'Continuar actividad', doing_activity_path(activity: a.id, n_question: @activities_user[i]['last_question']), 
-                data: {confirm:"Va a reanudar la actividad '#{a.name}'. ¿Desea continuar?"}, class: 'btn btn-primary' %></p>
+                <p><%= link_to 'Continuar actividad', doing_activity_path(activity: a.id, n_question: @activities_user[i]['last_question']), data: {confirm:"Va a reanudar la actividad #{a.name}. ¿Desea continuar?"}, class: 'btn btn-primary' %></p>
               <% end %>
             </div>
           <% end %>

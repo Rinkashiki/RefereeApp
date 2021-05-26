@@ -1,5 +1,6 @@
 <br>
 <div class="container center">
+  <h1>Pregunta <%= @n_question + 1 %></h1>
   <h2>Trivia</h2>
   <div class="elem activity rounded">
     <p>Pregunta: <%= @question.question %></p>
@@ -8,7 +9,7 @@
   <div>
     <h2 class="timer center rounded" id="timer"><%= "0" + (@question.response_time / 60).round().to_s + ":" + (@question.response_time % 60).to_s %></h2><br>
     <h3>Respuestas</h3>
-    <%= form_tag 'doing_activity_post', id: 'response' do %>
+    <%= form_tag 'doing_activity_post', id: 'response', remote: true do %>
       <% if !@answers.blank? %>
         <% @answers.each do |a| %>
           <div class="center topic bg-secondary question rounded">
@@ -21,6 +22,7 @@
       <div class="center mb-5">
         <%= hidden_field_tag :activity, @activity.id %>
         <%= hidden_field_tag :n_question, @n_question%>
+        <%= hidden_field_tag :format, :js %>
         <% if @n_question < @total_questions - 1 %>
           <%= submit_tag 'Siguiente', class: 'btn btn-primary', id: 'submit-response' %>
         <% else %>

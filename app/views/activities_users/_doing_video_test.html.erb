@@ -1,5 +1,6 @@
 <br>
 <div class="container center">
+  <h1>Pregunta <%= @n_question + 1 %></h1>
   <h2>Video Test</h2>
   <div>
     <h3>Video</h3>
@@ -13,7 +14,7 @@
     <div>
       <h2 class="timer center rounded" id="timer"><%= "0" + (@question.response_time / 60).round().to_s + ":" + (@question.response_time % 60).to_s %></h2><br>
       <h3>Respuestas</h3><br>
-      <%= form_tag 'doing_activity_post', id: 'response' do %>
+      <%= form_tag 'doing_activity_post', id: 'response', remote: true do %>
         <div>
           <h3>Decisión</h3>
             <% Decision.all.each do |d| %>
@@ -36,7 +37,8 @@
         </div>
         <div class="center mb-5">
           <%= hidden_field_tag :activity, @activity.id %>
-          <%= hidden_field_tag :n_question, @n_question%>
+          <%= hidden_field_tag :n_question, @n_question %>
+          <%= hidden_field_tag :format, :js %>
           <% if @n_question < @total_questions - 1 %>
             <%= submit_tag 'Siguiente', class: 'btn btn-primary', id: 'submit-response' %>
           <% else %>

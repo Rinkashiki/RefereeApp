@@ -1,5 +1,6 @@
 <br>
 <div class="center">
+  <h1>Pregunta <%= @n_question + 1 %></h1>
   <h2>Pregunta abierta</h2>
   <div class="elem activity rounded">
     <p>Pregunta: <%= @question.question %></p>
@@ -7,11 +8,12 @@
   </div>
   <div>
     <h2 class="center timer rounded" id="timer"><%= "0" + (@question.response_time / 60).round().to_s + ":" + (@question.response_time % 60).to_s %></h2><br>
-    <%= form_tag 'doing_activity_post', id: 'response' do %>
+    <%= form_tag 'doing_activity_post', id: 'response', remote: true do %>
       <p><%= text_area_tag :open_question, nil, size: '100x5' %></p>
       <div class="center mb-5">
         <%= hidden_field_tag :activity, @activity.id %>
         <%= hidden_field_tag :n_question, @n_question%>
+        <%= hidden_field_tag :format, :js %>
         <% if @n_question < @total_questions - 1 %>
           <%= submit_tag 'Siguiente', class: 'btn btn-primary', id: 'submit-response' %>
         <% else %>
